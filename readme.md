@@ -40,6 +40,7 @@ file and make sure the database exists.
 
 Once the database connection is successful, run commands below:
 ```
+composer install
 php artisan key:generate
 php artisan migrate --seed
 php artisan serve
@@ -49,5 +50,3 @@ Go to:
 ```
 http://127.0.0.1:8000/
 ```
-
-# Hooray

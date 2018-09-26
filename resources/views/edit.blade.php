@@ -2,7 +2,16 @@
 @section('title', 'List of albums')
 @section('content')
     <h2 class="page-header">Edit album: "{{$album->name}}"</h2><br/>
-    <form method="post" action="{{URL::route('update', ['id'=>$album->id])}}">
+    @if (\Session::has('errors'))
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form method="post" action="{{URL::route('update', ['id'=>$album->id])}}" enctype="multipart/form-data">
         {{ csrf_field() }}
         <input name="_method" type="hidden" value="PATCH">
         <div class="row">
@@ -35,6 +44,13 @@
             <div class="form-group col-md-4">
                 <label for="artist">Artist</label>
                 <input type="text" class="form-control" name="artist" value="{{$album->artist}}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label for="cover">Album Cover:({{$album->cover}})</label>
+                <input type="file" name="cover">
             </div>
         </div>
 

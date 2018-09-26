@@ -2,6 +2,15 @@
 @section('title', 'Create new album')
 @section('content')
     <h2 class="page-header">Create New Album</h2><br/>
+    @if (\Session::has('errors'))
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="post" action="{{URL::route('store')}}" enctype="multipart/form-data">
         {{csrf_field()}}
         <div class="row">
