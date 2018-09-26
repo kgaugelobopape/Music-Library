@@ -3,12 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Review;
+use Validator;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
     public function store(Request $request)
     {
+        $form_data = $request->all();
+        $rules = [
+            'name' => 'required',
+            'review' => 'required'
+        ];
+
+        $validators = Validator::make($form_data, $rules);
+
+        if($validators->fails()){
+            return redirect()->back()->withErrors($validators);
+        }
+
         $review = new Review;
         $review->name = $request->get('name');
         $review->review = $request->get('review');

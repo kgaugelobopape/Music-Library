@@ -41,6 +41,15 @@
 
         <div class="col-md-12">
             <h4 class="page-header">Added Review</h4>
+            @if (\Session::has('errors'))
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="post" action="{{URL::route('review')}}">
                 {{ csrf_field() }}
                 <div class="row">
